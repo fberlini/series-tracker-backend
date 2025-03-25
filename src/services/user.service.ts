@@ -1,6 +1,19 @@
+import { PrismaClient } from "@prisma/client";
+
 export class UserService {
-    createUser(email: string, password: string) {
+  constructor(private prisma: PrismaClient) {}
+
+  async createUser(email: string, password: string) {
+    try {
       // In a real app, you'd hash the password and store the user in a database
-      return { id: Date.now(), email };
+      return await this.prisma.user.create({
+        data: {
+        email,
+        password,
+        },
+      });
+    } catch (error) {
+      throw new Error('Failed to create user');
     }
+  }
 }
