@@ -1,19 +1,19 @@
-import { PrismaClient } from "@prisma/client";
+import { IUserRepository } from "../database/repositories/interfaces/userRepository.interface";
+import bcrypt from 'bcrypt';
 
 export class UserService {
-  constructor(private prisma: PrismaClient) {}
+  constructor(private userRepository: IUserRepository) {}
 
-  async createUser(email: string, password: string) {
-    try {
-      // In a real app, you'd hash the password and store the user in a database
-      return await this.prisma.user.create({
-        data: {
+  async createUser(email: string, password: string, firstName: string, lastName: string, nickname: string) {
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    return await this.userRepository.createUser({
         email,
-        password,
-        },
-      });
-    } catch (error) {
-      throw new Error('Failed to create user');
-    }
+        password: hashedPassword,
+        firstName,
+        lastName,
+        nickname,
+    });
   }
 }
