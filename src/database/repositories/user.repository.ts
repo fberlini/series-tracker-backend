@@ -1,27 +1,26 @@
-import { Prisma,PrismaClient,User } from "@prisma/client";
-import { IUserRepository } from "./interfaces/userRepository.interface";
+import { Prisma, User } from "@prisma/client";
+import { IUserRepository } from "./interfaces/user-repository.interface";
+import { prisma } from "../prisma/prisma-client";
 
 export class UserRepository implements IUserRepository {
-  constructor(private readonly prisma: PrismaClient) {}
-
   async createUser(data: Prisma.UserCreateInput): Promise<User> {
-    return await this.prisma.user.create({ data });
+    return await prisma.user.create({ data });
   }
 
   async findUserByEmail(email: string): Promise<User | null> {
-    return await this.prisma.user.findUnique({ where: { email } });
+    return await prisma.user.findUnique({ where: { email } });
   }
 
   async findUserById(id: string): Promise<User | null> {
-    return await this.prisma.user.findUnique({ where: { id } });
+    return await prisma.user.findUnique({ where: { id } });
   }
 
   async updateUser(id: string, data: Prisma.UserUpdateInput): Promise<User> {
-    return await this.prisma.user.update({ where: { id }, data });
+    return await prisma.user.update({ where: { id }, data });
   }
 
   async deleteUser(id: string): Promise<void> {
-    await this.prisma.user.delete({ where: { id } });
+    await prisma.user.delete({ where: { id } });
   }
 }
 

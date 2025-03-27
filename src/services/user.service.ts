@@ -1,4 +1,4 @@
-import { IUserRepository } from "../database/repositories/interfaces/userRepository.interface";
+import { IUserRepository } from "../database/repositories/interfaces/user-repository.interface";
 import bcrypt from 'bcrypt';
 
 export class UserService {
