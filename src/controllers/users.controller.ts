@@ -1,8 +1,9 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import { UserService } from '../services/user.service';
 import { UserRepository } from '../database/repositories/user.repository';
+import { AuthenticatedRequest } from '../middleware/types/authenticated-request';
 
-export async function createUser(req: Request, res: Response): Promise<Response> {
+export async function createUser(req: AuthenticatedRequest, res: Response): Promise<Response> {
     try {
         // Initialize the user service
         const userService = new UserService(new UserRepository());
@@ -26,7 +27,7 @@ export async function createUser(req: Request, res: Response): Promise<Response>
     }
 }
 
-export async function loginUser(req: Request, res: Response): Promise<Response> {
+export async function loginUser(req: AuthenticatedRequest, res: Response): Promise<Response> {
     try {
         // Initialize the user service
         const userService = new UserService(new UserRepository());
