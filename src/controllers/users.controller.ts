@@ -25,3 +25,27 @@ export async function createUser(req: Request, res: Response): Promise<Response>
         return res.status(500).json({ message: 'Internal server error', error: error });
     }
 }
+
+export async function loginUser(req: Request, res: Response): Promise<Response> {
+    try {
+        // Initialize the user service
+        const userService = new UserService(new UserRepository());
+
+        // Get the body of the request
+        const { email, password } = req.body;
+
+        // Validate the body of the request
+        if (!email || !password) {
+            return res.status(400).json({ message: 'All fields are required', fields: { email, password } });
+        }
+
+        // Login the user
+        const { user, token } = await userService.loginUser({ email, password });
+
+        // Return the user
+        return res.status(200).json({ user, token });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Internal server error', error: error });
+    }
+}

@@ -1,13 +1,12 @@
 import { IUserRepository } from "../database/repositories/interfaces/user-repository.interface";
-import bcrypt from 'bcrypt';
-
+import { comparePassword, hashPassword } from "../utils/password";
+import { generateToken } from "../utils/jwt";
 export class UserService {
   constructor(private userRepository: IUserRepository) {}
 
   async createUser({ email, password, firstName, lastName, nickname }:{ email: string, password: string, firstName: string, lastName: string, nickname: string }) {
     // Hash the password
-    const salt = await bcrypt.genSalt(new Date().getTime());
-    const hashedPassword = await bcrypt.hash(password, salt);
+    const hashedPassword = await hashPassword(password);
 
     // Create the user
     return await this.userRepository.createUser({
@@ -17,5 +16,26 @@ export class UserService {
         lastName,
         nickname,
     });
+  }
+
+  async loginUser({ email, password }:{ email: string, password: string }) {
+    // Find the user
+    const user = await this.userRepository.findUserByEmail(email);
+
+    // Check if the user exists
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    // Check if the password is correct
+    const isPasswordCorrect = await comparePassword(password, user.password);
+    if (!isPasswordCorrect) {
+      throw new Error('Invalid password');
+    }
+
+    const token = generateToken(user.id);
+
+    // Return the user
+    return { user, token };
   }
 }
