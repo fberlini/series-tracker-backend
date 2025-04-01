@@ -4,10 +4,12 @@ import bcrypt from 'bcrypt';
 export class UserService {
   constructor(private userRepository: IUserRepository) {}
 
-  async createUser(email: string, password: string, firstName: string, lastName: string, nickname: string) {
+  async createUser({ email, password, firstName, lastName, nickname }:{ email: string, password: string, firstName: string, lastName: string, nickname: string }) {
     // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const salt = await bcrypt.genSalt(new Date().getTime());
+    const hashedPassword = await bcrypt.hash(password, salt);
 
+    // Create the user
     return await this.userRepository.createUser({
         email,
         password: hashedPassword,
