@@ -12,5 +12,13 @@ services:
     volumes:
       - ./.docker/postgres_data:/var/lib/postgresql/data
 
-volumes:
-  pg_data:
+  redis:
+    container_name: redis
+    image: redis:7.4.1-alpine
+    restart: always
+    ports:
+      - "${REDIS_PORT}:${REDIS_PORT}"
+    volumes:
+      - ./.docker/redis_data:/data
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+
