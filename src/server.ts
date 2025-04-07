@@ -2,6 +2,9 @@ import express from "express";
 import { configureSession } from "./middleware/session";
 import authRoutes from "./routes/auth.routes";
 import userRoutes from "./routes/users.routes";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
