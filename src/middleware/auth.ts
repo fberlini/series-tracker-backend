@@ -1,21 +1,9 @@
-import { Response, NextFunction } from 'express';
-import { AuthenticatedRequest } from './types/authenticated-request';
-import { verifyToken } from '../utils/jwt';
+import { Request, Response, NextFunction } from 'express';
 
-export const protect = (req: AuthenticatedRequest, res: Response, next: NextFunction): void => {
-  const token = req.headers['authorization']?.split(' ')[1];
-
-  if (!token) {
-    res.status(401).json({ message: 'No token provided' });
+export function requireAuth(req: Request, res: Response, next: NextFunction): void {
+  if (!req.session.userId) {
+    res.status(401).json({ message: 'Unauthorized' });
     return;
   }
-
-  const decoded = verifyToken(token);
-  if (!decoded) {
-    res.status(401).json({ message: 'Invalid token' });
-    return;
-  }
-
-  req.userId = decoded.userId; // Add userId to request
   next();
-};
+}

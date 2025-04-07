@@ -130,4 +130,4 @@ dist
 .pnp.*
 
 # containers
-.docker/postgres_data
+.docker
