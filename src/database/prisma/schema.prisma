@@ -25,22 +25,35 @@ model User {
   nickname       String       @unique
   password       String
   seriesCreated  Series[]
+  seasonsCreated Season[]
   seriesFollowed UserSeries[]
 }
 
 model Series {
-  id            String       @id @default(uuid())
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
-  title         String
-  synopsis      String?
-  episodesCount Int
-  seasonsCount  Int
-  launchAt      DateTime?
-  createdBy     String
-  createdByUser User         @relation(fields: [createdBy], references: [id])
-  episodes      Episode[]
-  followedBy    UserSeries[]
+  id              String       @id @default(uuid())
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+  title           String
+  synopsis        String?
+  launchAt        DateTime?
+  createdByUserId String
+  createdByUser   User         @relation(fields: [createdByUserId], references: [id])
+  seasons         Season[]
+  followedBy      UserSeries[]
+}
+
+model Season {
+  id              String    @id @default(uuid())
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  synopsis        String?
+  number          Int
+  launchAt        DateTime?
+  seriesId        String
+  createdByUserId String
+  createdByUser   User      @relation(fields: [createdByUserId], references: [id])
+  series          Series    @relation(fields: [seriesId], references: [id])
+  episodes        Episode[]
 }
 
 model Episode {
@@ -50,10 +63,9 @@ model Episode {
   title         String
   synopsis      String?
   episodeNumber Int
-  seasonNumber  Int
   launchAt      DateTime
-  seriesId      String
-  series        Series   @relation(fields: [seriesId], references: [id])
+  seasonId      String
+  season        Season   @relation(fields: [seasonId], references: [id])
 }
 
 model UserSeries {

@@ -1,5 +1,6 @@
 import { IUserRepository } from "../database/repositories/interfaces/user-repository.interface";
 import { comparePassword } from "../utils/password";
+import { InvalidCredentialsError, UserNotFoundError } from "./error-extensions/auth-error.extensions";
 
 export class AuthService {
     constructor(private userRepository: IUserRepository) { }
@@ -10,13 +11,13 @@ export class AuthService {
 
         // Check if the user exists
         if (!user) {
-            throw new Error('User not found');
+            throw new UserNotFoundError();
         }
 
         // Check if the password is correct
         const isPasswordCorrect = await comparePassword(password, user.password);
         if (!isPasswordCorrect) {
-            throw new Error('Invalid password');
+            throw new InvalidCredentialsError();
         }
 
         // Return the user

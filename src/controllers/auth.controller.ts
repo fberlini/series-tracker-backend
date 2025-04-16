@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { AuthService } from '../services/auth.service';
 import { UserRepository } from '../database/repositories/user.repository';
+import { InvalidCredentialsError, UserNotFoundError } from '../services/error-extensions/auth-error.extensions';
 
 export async function loginUser(req: Request, res: Response) {
     try {
@@ -25,7 +26,12 @@ export async function loginUser(req: Request, res: Response) {
         return res.status(200).json({ user });
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ message: 'Internal server error', error: error });
+
+        if(error instanceof UserNotFoundError || error instanceof InvalidCredentialsError) {
+            return res.status(401).json({ message: 'Invalid email or password'})
+        }
+
+        return res.status(500).json({ message: 'Internal server error' });
     }
 }
 
@@ -42,6 +48,6 @@ export async function logoutUser(req: Request, res: Response) {
         });
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ message: 'Internal server error', error: error });
+        return res.status(500).json({ message: 'Internal server error' });
     }
 }

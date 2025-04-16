@@ -5,7 +5,7 @@ export class SeriesService {
 
     async createSeries({ title, userId, synopsis, launchAt }: { title: string, userId: string, synopsis: string, launchAt: Date }) {
         const date = launchAt.toISOString();
-        return await this.seriesRepository.create({ title, createdByUser: { connect: { id: userId } }, episodesCount: 0, seasonsCount: 0, synopsis, launchAt: date });
+        return await this.seriesRepository.create({ title, createdByUser: { connect: { id: userId } }, synopsis, launchAt: date });
     }
 
     async getSeriesById(id: string) {
