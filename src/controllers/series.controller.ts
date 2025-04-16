@@ -26,6 +26,18 @@ export async function createSeries(req: Request, res: Response) {
     }
 }
 
+export async function getAllSeries(req: Request, res: Response) {
+    try {
+        const seriesService = new SeriesService(new SeriesRepository());
+        const series = await seriesService.getAllSeries();
+
+        return res.status(200).json(series);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ messsage: 'Internal server error', error: error})
+    }
+}
+
 export async function getSeriesById(req: Request, res: Response) {
     try {
         const { id } = req.params;

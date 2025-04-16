@@ -5,19 +5,23 @@ export class SeriesService {
 
     async createSeries({ title, userId, synopsis, launchAt }: { title: string, userId: string, synopsis: string, launchAt: Date }) {
         const date = launchAt.toISOString();
-        return await this.seriesRepository.createSeries({ title, createdByUser: { connect: { id: userId } }, episodesCount: 0, seasonsCount: 0, synopsis, launchAt: date });
+        return await this.seriesRepository.create({ title, createdByUser: { connect: { id: userId } }, episodesCount: 0, seasonsCount: 0, synopsis, launchAt: date });
     }
 
     async getSeriesById(id: string) {
-        return await this.seriesRepository.findSeriesById(id);
+        return await this.seriesRepository.findById(id);
+    }
+
+    async getAllSeries() {
+        return await this.seriesRepository.findAll();
     }
 
     async updateSeries(id: string, { title, synopsis, launchAt }: { title: string, synopsis: string, launchAt: Date }) {
         const date = launchAt.toISOString();
-        return await this.seriesRepository.updateSeries(id, { title, synopsis, launchAt: date });
+        return await this.seriesRepository.update(id, { title, synopsis, launchAt: date });
     }
 
     async deleteSeries(id: string) {
-        return await this.seriesRepository.deleteSeries(id);
+        return await this.seriesRepository.delete(id);
     }
 }
