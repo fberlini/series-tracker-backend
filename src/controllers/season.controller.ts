@@ -29,8 +29,9 @@ export async function createSeason(req: Request, res: Response) {
 
 export async function getAllSeasons(req: Request, res: Response) {
     try {
+        const { seriesId } = req.params
         const seasonService = new SeasonService(new SeasonRepository());
-        const seasons = await seasonService.getAllSeasons();
+        const seasons = await seasonService.getAllSeasons(seriesId);
 
         return res.status(200).json(seasons);
     } catch (error) {

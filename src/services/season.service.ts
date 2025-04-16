@@ -7,8 +7,8 @@ export class SeasonService {
         return await this.seasonRepository.create({ createdByUser: { connect: { id: userId } }, number: number, synopsis, series: { connect: { id: seriesId } }, launchAt });
     }
 
-    async getAllSeasons() {
-        return await this.seasonRepository.findAll();
+    async getAllSeasons(seriesId: string) {
+        return await this.seasonRepository.findAllBySeries(seriesId);
     }
 
     async getSeasonById(id: string) {

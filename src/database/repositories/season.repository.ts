@@ -12,6 +12,9 @@ export class SeasonRepository implements ISeasonRepository {
     async findAll(): Promise<Season[]> {
         return await prisma.season.findMany();
     }
+    async findAllBySeries(seriesId: string): Promise<Season[]> {
+        return await prisma.season.findMany({ where: { seriesId }});
+    }
     async update(id: string, data: Prisma.SeasonUpdateInput): Promise<Season> {
         return await prisma.season.update({ where: { id }, data });
     }
