@@ -17,7 +17,7 @@ app.use(configureSession());
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/series", seriesRoutes);
-app.use("/api/seasons", seasonRoutes);
+app.use("/api/series/:seriesId/seasons", seasonRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

@@ -4,7 +4,8 @@ import { SeasonRepository } from '../database/repositories/season.repository';
 
 export async function createSeason(req: Request, res: Response) {
     try {
-        const { number, synopsis, seriesId, launchAt } = req.body;
+        const { number, synopsis, launchAt } = req.body;
+        const { seriesId } = req.params;
         const userId = req.session.userId;
 
         if (!userId) {
