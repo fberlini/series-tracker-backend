@@ -15,11 +15,11 @@ export class SeasonService {
         return await this.seasonRepository.findById(id);
     }
 
-    async updateSeason(id: string, { userId, number, synopsis, seriesId, launchAt }: { userId: string, number: number, synopsis: string, seriesId: string, launchAt?: Date }) {
-        return await this.seasonRepository.update(id, { createdByUser: { connect: { id: userId } }, number: number, synopsis, series: { connect: { id: seriesId } }, launchAt });
+    async updateSeason(id: string, { number, synopsis, launchAt }: { number: number, synopsis: string, launchAt?: Date }) {
+        return await this.seasonRepository.update(id, { number: number, synopsis, launchAt });
     }
 
-    async deleteSeries(id: string) {
+    async deleteSeason(id: string) {
         return await this.seasonRepository.delete(id);
     }
 }
