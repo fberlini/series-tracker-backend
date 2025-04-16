@@ -1,5 +1,3 @@
-#Commands
-
 ## Prisma
 
 - npx prisma migrate dev -n [name of migration] --- this command will migrate prisma.schema changes to db and update db types
@@ -15,4 +13,4 @@
 
 ## Run server
 
--- Dev mode: npm run dev
+- Dev mode: npm run dev
