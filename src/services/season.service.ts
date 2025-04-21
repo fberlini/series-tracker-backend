@@ -3,7 +3,7 @@ import { ISeasonRepository } from "../database/repositories/interfaces/season-re
 export class SeasonService {
     constructor(private readonly repository: ISeasonRepository) { }
 
-    async createSeason({ userId, number, synopsis, seriesId, launchAt }: { userId: string, number: number, synopsis: string, seriesId: string, launchAt?: Date }) {
+    async createSeason({ userId, number, synopsis, seriesId, launchAt }: { userId: string, number: number, synopsis: string, seriesId: string, launchAt: Date }) {
         return await this.repository.create({ createdByUser: { connect: { id: userId } }, number: number, synopsis, series: { connect: { id: seriesId } }, launchAt });
     }
 

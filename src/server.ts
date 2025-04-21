@@ -6,6 +6,7 @@ import seriesRoutes from "./routes/series.routes";
 import seasonRoutes from "./routes/season.routes";
 import episodeRoutes from "./routes/episode.routes";
 import dotenv from "dotenv";
+import { sendEmailMessage } from "./infrastructure/email-client";
 
 dotenv.config();
 
@@ -24,4 +25,3 @@ app.use("/api/series/:seriesId/seasons/:seasonId/episodes", episodeRoutes);
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-
