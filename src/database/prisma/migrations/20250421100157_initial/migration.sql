@@ -21,7 +21,7 @@ CREATE TABLE "Series" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "title" TEXT NOT NULL,
     "synopsis" TEXT,
-    "launchAt" TIMESTAMP(3),
+    "launchAt" TIMESTAMP(3) NOT NULL,
     "createdByUserId" TEXT NOT NULL,
 
     CONSTRAINT "Series_pkey" PRIMARY KEY ("id")
@@ -34,7 +34,7 @@ CREATE TABLE "Season" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "synopsis" TEXT,
     "number" INTEGER NOT NULL,
-    "launchAt" TIMESTAMP(3),
+    "launchAt" TIMESTAMP(3) NOT NULL,
     "seriesId" TEXT NOT NULL,
     "createdByUserId" TEXT NOT NULL,
 
@@ -51,6 +51,7 @@ CREATE TABLE "Episode" (
     "episodeNumber" INTEGER NOT NULL,
     "launchAt" TIMESTAMP(3) NOT NULL,
     "seasonId" TEXT NOT NULL,
+    "createdByUserId" TEXT NOT NULL,
 
     CONSTRAINT "Episode_pkey" PRIMARY KEY ("id")
 );
@@ -81,6 +82,9 @@ ALTER TABLE "Season" ADD CONSTRAINT "Season_seriesId_fkey" FOREIGN KEY ("seriesI
 
 -- AddForeignKey
 ALTER TABLE "Episode" ADD CONSTRAINT "Episode_seasonId_fkey" FOREIGN KEY ("seasonId") REFERENCES "Season"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Episode" ADD CONSTRAINT "Episode_createdByUserId_fkey" FOREIGN KEY ("createdByUserId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "UserSeries" ADD CONSTRAINT "UserSeries_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

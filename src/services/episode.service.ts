@@ -4,7 +4,7 @@ export class EpisodeService {
     constructor(private readonly repository: IEpisodeRepository) {}
 
     async createEpisode({ userId, episodeNumber, title, synopsis, seasonId, launchAt }: { userId: string, episodeNumber: number, title: string, synopsis: string, seasonId: string, launchAt: Date }) {
-        return await this.repository.create({ episodeNumber, launchAt, title, synopsis, season: { connect: { id: seasonId } } });
+        return await this.repository.create({ episodeNumber, launchAt, title, synopsis, season: { connect: { id: seasonId } }, createdByUser: { connect: { id: userId }} });
     }
 
     async getAllEpisodes(seasonId: string) {

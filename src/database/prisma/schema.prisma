@@ -14,19 +14,20 @@ datasource db {
 }
 
 model User {
-  id             String       @id @default(uuid())
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
-  firstName      String
-  lastName       String
-  email          String       @unique
-  emailVerified  Boolean      @default(false)
-  avatarFilename String?
-  nickname       String       @unique
-  password       String
-  seriesCreated  Series[]
-  seasonsCreated Season[]
-  seriesFollowed UserSeries[]
+  id              String       @id @default(uuid())
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+  firstName       String
+  lastName        String
+  email           String       @unique
+  emailVerified   Boolean      @default(false)
+  avatarFilename  String?
+  nickname        String       @unique
+  password        String
+  seriesCreated   Series[]
+  seasonsCreated  Season[]
+  episodesCreated Episode[]
+  seriesFollowed  UserSeries[]
 }
 
 model Series {
@@ -35,7 +36,7 @@ model Series {
   updatedAt       DateTime     @updatedAt
   title           String
   synopsis        String?
-  launchAt        DateTime?
+  launchAt        DateTime
   createdByUserId String
   createdByUser   User         @relation(fields: [createdByUserId], references: [id])
   seasons         Season[]
@@ -48,7 +49,7 @@ model Season {
   updatedAt       DateTime  @updatedAt
   synopsis        String?
   number          Int
-  launchAt        DateTime?
+  launchAt        DateTime
   seriesId        String
   createdByUserId String
   createdByUser   User      @relation(fields: [createdByUserId], references: [id])
@@ -57,15 +58,17 @@ model Season {
 }
 
 model Episode {
-  id            String   @id @default(uuid())
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  title         String
-  synopsis      String?
-  episodeNumber Int
-  launchAt      DateTime
-  seasonId      String
-  season        Season   @relation(fields: [seasonId], references: [id])
+  id              String   @id @default(uuid())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  title           String
+  synopsis        String?
+  episodeNumber   Int
+  launchAt        DateTime
+  seasonId        String
+  season          Season   @relation(fields: [seasonId], references: [id])
+  createdByUserId String
+  createdByUser   User     @relation(fields: [createdByUserId], references: [id])
 }
 
 model UserSeries {
