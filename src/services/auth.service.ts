@@ -3,11 +3,11 @@ import { comparePassword } from "../utils/password";
 import { InvalidCredentialsError, UserNotFoundError } from "./error-extensions/auth-error.extensions";
 
 export class AuthService {
-    constructor(private userRepository: IUserRepository) { }
+    constructor(private repository: IUserRepository) { }
 
     async loginUser({ email, password }: { email: string, password: string }) {
         // Find the user
-        const user = await this.userRepository.findUserByEmail(email);
+        const user = await this.repository.findUserByEmail(email);
 
         // Check if the user exists
         if (!user) {

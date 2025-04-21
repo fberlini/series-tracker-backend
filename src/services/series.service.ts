@@ -1,27 +1,27 @@
 import { ISeriesRepository } from "../database/repositories/interfaces/series-repository.interface";
 
 export class SeriesService {
-    constructor(private seriesRepository: ISeriesRepository) { }
+    constructor(private repository: ISeriesRepository) { }
 
     async createSeries({ title, userId, synopsis, launchAt }: { title: string, userId: string, synopsis: string, launchAt: Date }) {
         const date = launchAt.toISOString();
-        return await this.seriesRepository.create({ title, createdByUser: { connect: { id: userId } }, synopsis, launchAt: date });
+        return await this.repository.create({ title, createdByUser: { connect: { id: userId } }, synopsis, launchAt: date });
     }
 
     async getSeriesById(id: string) {
-        return await this.seriesRepository.findById(id);
+        return await this.repository.findById(id);
     }
 
     async getAllSeries() {
-        return await this.seriesRepository.findAll();
+        return await this.repository.findAll();
     }
 
     async updateSeries(id: string, { title, synopsis, launchAt }: { title: string, synopsis: string, launchAt: Date }) {
         const date = launchAt.toISOString();
-        return await this.seriesRepository.update(id, { title, synopsis, launchAt: date });
+        return await this.repository.update(id, { title, synopsis, launchAt: date });
     }
 
     async deleteSeries(id: string) {
-        return await this.seriesRepository.delete(id);
+        return await this.repository.delete(id);
     }
 }

@@ -4,6 +4,7 @@ import authRoutes from "./routes/auth.routes";
 import userRoutes from "./routes/users.routes";
 import seriesRoutes from "./routes/series.routes";
 import seasonRoutes from "./routes/season.routes";
+import episodeRoutes from "./routes/episode.routes";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -18,6 +19,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/series", seriesRoutes);
 app.use("/api/series/:seriesId/seasons", seasonRoutes);
+app.use("/api/series/:seriesId/seasons/:seasonId/episodes", episodeRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
