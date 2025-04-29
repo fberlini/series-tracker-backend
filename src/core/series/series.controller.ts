@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { SeriesService } from '../services/series.service';
-import { SeriesRepository } from '../database/repositories/series.repository';
+import { SeriesService } from './series.service';
+import { SeriesRepository } from './repository/series.repository';
 
 export async function createSeries(req: Request, res: Response) {
     try {

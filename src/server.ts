@@ -1,12 +1,11 @@
 import express from "express";
-import { configureSession } from "./middleware/session";
-import authRoutes from "./routes/auth.routes";
-import userRoutes from "./routes/users.routes";
-import seriesRoutes from "./routes/series.routes";
-import seasonRoutes from "./routes/season.routes";
-import episodeRoutes from "./routes/episode.routes";
+import { configureSession } from "./core/auth/middleware/session";
+import authRoutes from "./core/auth/auth.routes";
+import userRoutes from "./core/users/users.routes";
+import seriesRoutes from "./core/series/series.routes";
+import seasonRoutes from "./core/seasons/season.routes";
+import episodeRoutes from "./core/episodes/episode.routes";
 import dotenv from "dotenv";
-import { sendEmailMessage } from "./infrastructure/email-client";
 
 dotenv.config();
 

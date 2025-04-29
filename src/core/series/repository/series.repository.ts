@@ -1,6 +1,6 @@
 import { Prisma, Series } from "@prisma/client";
-import { ISeriesRepository } from "./interfaces/series-repository.interface";
-import { prisma } from "../prisma/prisma-client";
+import { ISeriesRepository } from "./series-repository.interface";
+import { prisma } from "../../../database/prisma/prisma-client";
 
 export class SeriesRepository implements ISeriesRepository {
     async create(data: Prisma.SeriesCreateInput): Promise<Series> {

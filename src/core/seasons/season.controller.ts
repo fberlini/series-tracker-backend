@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { SeasonService } from '../services/season.service';
-import { SeasonRepository } from '../database/repositories/season.repository';
+import { SeasonService } from './season.service';
+import { SeasonRepository } from './repository/season.repository';
 
 export async function createSeason(req: Request, res: Response) {
     try {

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { EpisodeService } from '../services/episode.service';
-import { EpisodeRepository } from '../database/repositories/episode.repository';
+import { EpisodeService } from './episode.service';
+import { EpisodeRepository } from './repository/episode.repository';
 
 export async function createEpisode(req: Request, res: Response) {
     try {

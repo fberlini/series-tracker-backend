@@ -1,4 +1,4 @@
-import { ISeasonRepository } from "../database/repositories/interfaces/season-repository.interface";
+import { ISeasonRepository } from "./repository/season-repository.interface";
 
 export class SeasonService {
     constructor(private readonly repository: ISeasonRepository) { }

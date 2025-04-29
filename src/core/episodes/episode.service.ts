@@ -1,4 +1,4 @@
-import { IEpisodeRepository } from "../database/repositories/interfaces/episode-repository.interface";
+import { IEpisodeRepository } from "./repository/episode-repository.interface";
 
 export class EpisodeService {
     constructor(private readonly repository: IEpisodeRepository) {}

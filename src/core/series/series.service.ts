@@ -1,4 +1,4 @@
-import { ISeriesRepository } from "../database/repositories/interfaces/series-repository.interface";
+import { ISeriesRepository } from "./repository/series-repository.interface";
 
 export class SeriesService {
     constructor(private repository: ISeriesRepository) { }

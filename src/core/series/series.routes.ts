@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { createSeries, getSeriesById, updateSeries, deleteSeries, getAllSeries } from '../controllers/series.controller';
-import { requireAuth } from '../middleware/auth';
+import { createSeries, getSeriesById, updateSeries, deleteSeries, getAllSeries } from './series.controller';
+import { requireAuth } from '../auth/middleware/auth';
 
 const router = Router();
 

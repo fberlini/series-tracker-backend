@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { AuthService } from '../services/auth.service';
-import { UserRepository } from '../database/repositories/user.repository';
-import { InvalidCredentialsError, UserNotFoundError } from '../services/error-extensions/auth-error.extensions';
+import { AuthService } from './auth.service';
+import { UserRepository } from '../users/repository/user.repository';
+import { InvalidCredentialsError, UserNotFoundError } from './error-extensions/auth-error.extensions';
 
 export async function loginUser(req: Request, res: Response) {
     try {

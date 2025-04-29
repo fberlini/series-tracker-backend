@@ -1,6 +1,6 @@
 import { Prisma, Episode } from "@prisma/client";
-import { IEpisodeRepository } from "./interfaces/episode-repository.interface";
-import { prisma } from "../prisma/prisma-client";
+import { IEpisodeRepository } from "./episode-repository.interface";
+import { prisma } from "../../../database/prisma/prisma-client";
 
 export class EpisodeRepository implements IEpisodeRepository {
     async create(data: Prisma.EpisodeCreateInput): Promise<Episode> {

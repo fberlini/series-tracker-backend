@@ -1,5 +1,5 @@
-import { IUserRepository } from "../database/repositories/interfaces/user-repository.interface";
-import { hashPassword } from "../utils/password";
+import { IUserRepository } from "./repository/user-repository.interface";
+import { hashPassword } from "../../utils/password";
 
 export class UserService {
   constructor(private repository: IUserRepository) { }

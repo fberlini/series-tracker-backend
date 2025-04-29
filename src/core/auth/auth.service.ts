@@ -1,5 +1,5 @@
-import { IUserRepository } from "../database/repositories/interfaces/user-repository.interface";
-import { comparePassword } from "../utils/password";
+import { IUserRepository } from "../users/repository/user-repository.interface";
+import { comparePassword } from "../../utils/password";
 import { InvalidCredentialsError, UserNotFoundError } from "./error-extensions/auth-error.extensions";
 
 export class AuthService {

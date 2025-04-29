@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { requireAuth } from "../middleware/auth";
-import { createSeason, deleteSeason, getAllSeasons, getSeason, updateSeason } from "../controllers/season.controller";
+import { requireAuth } from "../auth/middleware/auth";
+import { createSeason, deleteSeason, getAllSeasons, getSeason, updateSeason } from "./season.controller";
 
 const router = Router({ mergeParams: true });
 

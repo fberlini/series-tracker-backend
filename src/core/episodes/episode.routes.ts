@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { requireAuth } from "../middleware/auth";
-import { createEpisode, deleteEpisode, getAllEpisodes, getEpisode, updateEpisode } from "../controllers/episode.controller";
+import { requireAuth } from "../auth/middleware/auth";
+import { createEpisode, deleteEpisode, getAllEpisodes, getEpisode, updateEpisode } from "./episode.controller";
 
 const router = Router({ mergeParams: true });
 

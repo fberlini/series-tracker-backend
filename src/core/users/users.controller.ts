@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { UserService } from '../services/user.service';
-import { UserRepository } from '../database/repositories/user.repository';
+import { UserService } from './user.service';
+import { UserRepository } from './repository/user.repository';
 
 export async function createUser(req: Request, res: Response) {
     try {

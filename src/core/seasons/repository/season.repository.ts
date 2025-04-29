@@ -1,6 +1,6 @@
 import { Prisma, Season } from "@prisma/client";
-import { ISeasonRepository } from "./interfaces/season-repository.interface";
-import { prisma } from "../prisma/prisma-client";
+import { ISeasonRepository } from "./season-repository.interface";
+import { prisma } from "../../../database/prisma/prisma-client";
 
 export class SeasonRepository implements ISeasonRepository {
     async create(data: Prisma.SeasonCreateInput): Promise<Season> {
